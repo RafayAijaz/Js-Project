@@ -1,2 +1,2 @@
 # Js-Project
-Login Signup
+First JavaScript Project
