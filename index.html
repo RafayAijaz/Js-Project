@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+
+        }
+
+        .main-bg {
+            height: 120%;
+            width: 100%;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.564), rgba(0, 0, 0, 0.718)), url(https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: absolute;
+        }
+
+        img {
+            top: 0%;
+            left: 48%;
+            transform: translate(-50%, -2%);
+            position: relative;
+            align-items: center;
+        }
+
+        .title {
+            text-align: center;
+            font-family: 'Kanit', sans-serif;
+            letter-spacing: 2px;
+            font-weight: 700;
+
+        }
+
+        .main-form {
+            height: 100vh;
+            width: 32%;
+            color: white;
+            background-color: rgb(35, 40, 51);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 30px;
+        }
+
+        .marks-row {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .marks-column {
+            flex-basis: 120px;
+        }
+
+        label {
+            font-family: 'Kanit', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        option {
+            font-family: 'Kanit', sans-serif;
+            font-weight: 900;
+        }
+
+        select {
+            font-family: 'Kanit', sans-serif;
+            font-weight: 900;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=number] {
+            font-weight: 500;
+        }
+
+        .marksheet.active {
+            display: block;
+
+        }
+
+        .marksheet {
+            height: 80vh;
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #16cbdbe0;
+            color: black;
+            border-radius: 35px;
+            display: none;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .div-main {
+            display: flex;
+            justify-content: center;
+            gap: 180px;
+        }
+
+        .div-info h6 {
+            padding: 5px;
+            font-weight: 500;
+            font-family: 'Kanit', sans-serif;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .div-info h5 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            padding: 5px;
+            letter-spacing: 2px;
+        }
+
+        .div-info table {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        th {
+            background-color: #5e646f;
+            color: white;
+            border: 1px solid black;
+            letter-spacing: 2px;
+            font-size: 18px;
+        }
+
+        th,
+        td {
+            width: 250px;
+            height: 50px;
+            text-align: center;
+            padding: 5px;
+            font-size: 18px;
+        }
+
+        .sub_marks td {
+            font-weight: 800;
+        }
+
+        .st_ql h6 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 3px 08px;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .js_cl h6 {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            padding: 3px 08px;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .Error {
+            color: #DC3545;
+            font-family: 'Kanit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            font-family: 'Kanit', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        @media screen and (max-width:1270px) {
+            .main-form {
+                /* height: 90vh; */
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <section >
+        <div class="main-bg">
+            <div class="container main-form">
+                <!-- <p class="text-center title text-dark">Free Result Checker</p> -->
+                <img src="./logo2.png.png" height="90" alt="" >
+                <h2 class="title text-info">Online Result Checker</h2>
+                <form>
+                    <div class="mb-2">
+                        <label for="Name" class="form-label">Name: </label>
+                        <input type="text" class="form-control" id="exampleInputname" aria-describedby="emailHelp"
+                            onfocus="clearinp()">
+                        <span class="nameErr Err"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="Email" class="form-label">Email Address: </label>
+                        <input type="email" class="form-control" id="exampleInputemail" onfocus="clearinp()">
+                        <span class="emailErr Err"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="Section" class="form-label">Section:</label>
+                        <input type="text" class="form-control" id="exampleInputsection" onfocus="clearinp()">
+                        <span class="secErr Err"></span>
+                    </div>
+                    <div class="marks-row mb-2">
+                        <div class="marks-column">
+                            <label for="English" class="form-label ">English:</label>
+                            <input type="number" class="form-control" id="exampleInputeng" onfocus="clearinp()">
+                        </div>
+                        <div class="marks-column">
+                            <label for="Urdu" class="form-label">Urdu:</label>
+                            <input type="number" class="form-control" id="exampleInputurdu" onfocus="clearinp()">
+                        </div>
+                        <div class="marks-column">
+                            <label for="Islamiyat" class="form-label">Islamiyat:</label>
+                            <input type="number" class="form-control" id="exampleInputisl" onfocus="clearinp()">
+                        </div>
+                    </div>
+                    <span class="markErr Err"></span>
+                    <div class="mt-3 mb-3">
+                        <select class="form-select selection" aria-label="select example" onfocus="clearinp()">
+                            <option selected value="">Select Your Group </option>
+                            <option value="Pre Medical">Pre Medical</option>
+                            <option value="Pre Engineering">Pre Engineering</option>
+                            <option value="Computer Science">Computer Science</option>
+                        </select>
+                    </div>
+                    <span class="Error"></span>
+                    <a type="submit" class="btn btn-info form-control mt-2">Submit</a>
+                </form>
+                <div class="marksheet">
+                    <div class="container">
+                        <div class="div-main mt-3">
+                            <div class="div-info">
+                                <h6>Student Name:</h6>
+                                <h6>Email:</h6>
+                                <h6>Section:</h6>
+                                <h6>Group:</h6>
+                            </div>
+                            <div class="div-info st_info">
+                                <h5>example</h6>
+                                    <h5>example</h6>
+                                        <h5>example</h6>
+                                            <h5>example</h6>
+                            </div>
+                        </div>
+                        <table class="mt-3">
+                            <tr>
+                                <th class="bg-dark">English</th>
+                                <th class="bg-dark">Urdu</th>
+                                <th class="bg-dark">Islamiyat</th>
+
+                            </tr>
+                            <tr class="sub_marks">
+                                <td>30</td>
+                                <td>30</td>
+                                <td>30</td>
+                            </tr>
+                        </table>
+                        <div style="display: flex;justify-content: space-evenly;">
+                            <div class="st_ql">
+                                <h6>Percentage:</h6>
+                                <h6>Total Marks:</h6>
+                                <h6>Average:</h6>
+                                <h6>Grade:</h6>
+                            </div>
+                            <div class="js_cl">
+                                <h6></h6>
+                                <h6></h6>
+                                <h6></h6>
+                                <h6></h6>
+                            </div>
+                        </div>
+                        <div class="mx-auto col-2">
+                            <a href="#" class="btn btn-dark btn-lg" onclick="closeDiv()">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        var effect = document.querySelector("a")
+        effect.addEventListener("click", validation)
+        var name = document.getElementById("exampleInputname").value
+        var email = document.getElementById("exampleInputemail").value
+        var section = document.getElementById("exampleInputsection").value
+        var group = document.querySelector(".form-select").value
+        var eng = document.querySelector("#exampleInputeng").value
+        var urd = document.querySelector("#exampleInputurdu").value
+        var isl = document.querySelector("#exampleInputisl").value
+
+        var error = document.querySelector(".Error")
+        function validation() {
+            var name = document.getElementById("exampleInputname").value
+            var email = document.getElementById("exampleInputemail").value
+            var section = document.getElementById("exampleInputsection").value
+            var group = document.querySelector(".form-select").value
+
+            var eng = document.querySelector("#exampleInputeng").value
+            var urd = document.querySelector("#exampleInputurdu").value
+            var isl = document.querySelector("#exampleInputisl").value
+
+            var nameErr = document.querySelector(".nameErr")
+            var emailErr = document.querySelector(".emailErr")
+            var secErr = document.querySelector(".secErr")
+            var markErr = document.querySelector(".markErr")
+            if (name == "" || name < 3) {
+                error.innerHTML = "Name must greater than 3!"
+            } else if (email == "" || email <= 6) {
+                error.innerHTML = "Email must greater than 6!"
+            } else if (section == "" || section == null) {
+                error.innerHTML = "Enter Your Section!"
+            } else if (eng == "" || eng === isNaN()) {
+                error.innerHTML = "Enter your English marks"
+            } else if (urd == "" || urd === isNaN()) {
+                error.innerHTML = "Enter your urdu marks"
+            } else if (isl == "" || isl === isNaN()) {
+                error.innerHTML = "Enter your Islamiyat marks"
+            } else if (group == "" || group == null) {
+                error.innerHTML = "Select your Group"
+            } else {
+                bodyeffect()
+            }
+        }
+        function clearinp() {
+            error.innerHTML = "";
+        }
+        function bodyeffect() {
+
+            var marksheet = document.querySelector(".marksheet")
+            marksheet.classList.toggle("active")
+            var st_div = document.querySelector(".st_info")
+            var name = document.getElementById("exampleInputname").value
+            var email = document.getElementById("exampleInputemail").value
+            var section = document.getElementById("exampleInputsection").value
+            var group = document.querySelector(".form-select").value
+            st_div.children[0].innerHTML = name
+            st_div.children[1].innerHTML = email
+            st_div.children[2].innerHTML = section
+            st_div.children[3].innerHTML = group
+
+
+
+            var Sub_marks = document.querySelector(".sub_marks")
+            var eng = document.querySelector("#exampleInputeng").value
+            var urd = document.querySelector("#exampleInputurdu").value
+            var isl = document.querySelector("#exampleInputisl").value
+            Sub_marks.children[0].innerHTML = eng
+            Sub_marks.children[1].innerHTML = urd
+            Sub_marks.children[2].innerHTML = isl
+
+            let total = Number(+eng + +urd + +isl)
+            let per = Math.round((total / 300) * 100);
+            let avr = (Number(+eng + +urd + +isl) / 3)
+
+
+
+            var calculation = document.querySelector(".js_cl")
+            calculation.children[0].innerHTML = per.toFixed(2) + "%"
+            calculation.children[1].innerHTML = total
+            calculation.children[2].innerHTML = avr
+
+            if (per >= 90 && per <= 100) {
+                calculation.children[3].innerHTML = "A+"
+            } else if (per >= 70 && per < 90) {
+                calculation.children[3].innerHTML = "A"
+            } else if (per >= 60 && per < 70) {
+                calculation.children[3].innerHTML = "B"
+            } else if (per >= 40 && per < 60) {
+                calculation.children[3].innerHTML = "C"
+            } else {
+                calculation.children[3].innerHTML = "F"
+            }
+
+
+
+        }
+        function closeDiv() {
+            var marksheet = document.querySelector(".marksheet")
+            marksheet.style = "display:none;"
+            marksheet.classList.remove("active");
+            window.location.reload()
+        }
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script> -->
+</body>
+
+</html>
